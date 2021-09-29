@@ -5,47 +5,107 @@
     <title>ALTMESS</title>
         <link rel="stylesheet" href="index.css">
   </head>
-  <body>
-    <div class="header">
-      <div><span></span></div>
-      <div><span>ALTMESS</span></div>
-      <div id="settings-div"><span id='settings'>⚙️</span></div>
+  <body id="login-window">
+    <div id="inv-window">
+      <br><br><br>
+      <h2>Invite users to group</h2>
+      <div id="users-to-invite"></div><br>
+      <button id="invite-button">Invite</button>
+      <button id="invite-back">Back</button>
     </div>
+    <div id="loginwin">
+      <div class="border-box">
+        <br><br><br><br><br><br><br>
+      <h2>Login </h2>
+      <label for="uname" id="un">Username:</label>
+      <input type="text" name="user" placeholder="Enter Username" id="uname"><br/>
+
+      <label for="upass" id="ps">Password:</label>
+      <input type="password" name="pass" placeholder="Enter Password" id="upass"><br/>
+
+      <button id="submit">Login</button>
+
+      <button id="newaccount">New Account</button>
+      <button id="forgotpass">Forgot password</button><br><br>
+      <span class="error" id="lerror"></span>
+      </div>
+
+    </div>
+    <div id="cg-window">
+      <br><br><br><br><br><br><br><br>
+      <h2>Create Group</h2>
+      <label for="uname" id="cgun">Group name:</label>
+      <input type="text" name="user" id="cgname"><br/>
+      <button id="cgsubmit">Submit</button>
+      <button id="gr-back">Back</button><br><br>
+      <span class="error" id="crerror"></span>
+    </div>
+    <div id="forgotwin">
+      <div class="border-box">
+        <br><br><br><br><br><br><br>
+      <h2>Forgot password - Type your login </h2>
+      <label for="uname" id="fun">Username:</label>
+      <input type="text" name="user" placeholder="Enter Username" id="fname"><br/>
+
+
+      <button id="fsubmit">Submit</button>
+
+      <button id="fbacktologin">Back to login view</button><br><br>
+      <span class="error" id="ferror"></span>
+      </div>
+    </div>
+    <div id="codewin">
+      <div class="border-box">
+        <br><br><br><br><br><br><br>
+      <h2>Forgot password - Type code from your email: </h2>
+      <label for="uname" id="cun">Code:</label>
+      <input type="text" name="user" placeholder="Enter Code" id="ccode"><br/>
+
+      <label  for="r2" id="cpwd">New Password :</label>
+      <input type="password" name="pass" id="cpass1"><br/>
+
+      <label  for="r3" id="cpwd2">New Password :</label>
+      <input type="password" name="pass" id="cpass2"><br/>
+
+      <button id="csubmit">Submit</button>
+
+      <button id="cbacktologin">Back to login view</button><br><br>
+      <span class="error" id="coerror"></span>
+      </div>
+    </div>
+    <div id="registerwin">
+              <br><br><br><br><br><br><br>
+      <h2>Registration</h2>
+
+      <label  for="r1" id="run">Username :</label>
+      <input type="text" name="uname" id="rlogin"><br/>
+
+      <label  for="r2" id="rpwd">Password :</label>
+      <input type="password" name="pass" id="rpass1"><br/>
+
+      <label  for="r3" id="rpwd2">Password :</label>
+      <input type="password" name="pass" id="rpass2"><br/>
+
+      <label  for="r4" id="rem">Email :</label>
+      <input type="text" name="email" id="remail"><br/>
+
+      <button type="submit" value="Submit" id="rbutton">Register</button>
+      <button id="backtologin">Back to login view</button>
+    </div>
+    <div id="main">
+      <div class="header">
+        <div><span></span></div>
+        <div><span>ALTMESS</span></div>
+        <div id="settings-div"><span id='logout'>🚪‍</span></div>
+      </div>
     <section>
       <div class="pannel" id="left-pannel">
         <div class="left-box" id="GMs-header">
-          Channels
+          <div id="gm-channels">Channels</div>
+          <div id="gm-plus">➕</div>
         </div>
         <div class="left-box"  id="GMs">
           <ul id="channels-list">
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
-            <li>test</li>
           </ul>
         </div>
         <div class="left-box"  id="DMs-header">
@@ -53,47 +113,15 @@
         </div>
           <div class="left-box"  id="DMs">
             <ul id="contact-list">
-
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
-              <li>test</li>
             </ul>
         </div>
       </div>
       <div class="pannel" id="right-pannel">
         <div id="right-top">
           <div id="right-header">
-            Channel Name
+            <span id="invite-members">✉️</span>
+            <span id="channel-title"></span>
+            <button id="leave-group">leave</button>
           </div>
           <div id="conversation-container">
             <div id="conversation">
@@ -102,10 +130,13 @@
           </div>
         </div>
         <div id="right-bottom">
-          <input type="text" name="input-message">
-          <input type="button" name="input-send-button" value="Send">
+          <input type="text" name="input-message" id="content-to-send">
+          <input id="send_button" type="button" name="input-send-button" value="Send">
         </div>
       </div>
     </section>
+    </div>
+</div>
+    <script src="r.js"></script>
   </body>
 </html>
