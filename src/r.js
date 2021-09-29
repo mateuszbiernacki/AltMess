@@ -1,6 +1,15 @@
 const $ = require('jquery');
 const { dialog, getCurrentWindow } = require('electron');
+const fs = require('fs')
 
+
+var IP = "127.0.0.1"
+
+fs.readFile('IP', (err, data) => {
+    if (err) throw err;
+
+    IP = data.toString()
+})
 
 var token = 't';
 var login = '';
@@ -28,7 +37,7 @@ function refresh(){
     "token": token
   }
   $.ajax({
-    url: 'https://127.0.0.1/get_message',
+    url: 'https://'+IP+'/get_message',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -54,7 +63,7 @@ function refresh(){
                 "friend": u_login
               }
               $.ajax({
-                url: 'https://127.0.0.1/get_dms',
+                url: 'https://'+IP+'/get_dms',
                 data: JSON.stringify(DataToSend),
                 dataType: 'json',
                 type: 'POST',
@@ -99,7 +108,7 @@ function refresh(){
                 "group_id": g_id
               }
               $.ajax({
-                url: 'https://127.0.0.1/get_gms',
+                url: 'https://'+IP+'/get_gms',
                 data: JSON.stringify(DataToSend),
                 dataType: 'json',
                 type: 'POST',
@@ -155,7 +164,7 @@ $("#logout").click(function(){
     "token": token
   }
   $.ajax({
-    url: 'https://127.0.0.1/logout',
+    url: 'https://'+IP+'/logout',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -207,7 +216,7 @@ $("#invite-button").click(function(){
     "invitees": checked_users
   }
   $.ajax({
-    url: 'https://127.0.0.1/invite_to_group',
+    url: 'https://'+IP+'/invite_to_group',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -288,7 +297,7 @@ $("#fsubmit").click(function(){
     "login": login
   }
   $.ajax({
-    url: 'https://127.0.0.1/forgot_password',
+    url: 'https://'+IP+'/forgot_password',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -322,7 +331,7 @@ $("#csubmit").click(function(){
     }
     console.log(DataToSend);
     $.ajax({
-      url: 'https://127.0.0.1/change_password',
+      url: 'https://'+IP+'/change_password',
       data: JSON.stringify(DataToSend),
       dataType: 'json',
       type: 'POST',
@@ -357,7 +366,7 @@ $("#submit").click(function(){
   }
   console.log(DataToSend);
   $.ajax({
-    url: 'https://127.0.0.1/login',
+    url: 'https://'+IP+'/login',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -401,7 +410,7 @@ $("#rbutton").click(function(){
     }
     console.log(DataToSend);
     $.ajax({
-      url: 'https://127.0.0.1/register',
+      url: 'https://'+IP+'/register',
       data: JSON.stringify(DataToSend),
       dataType: 'json',
       type: 'POST',
@@ -432,7 +441,7 @@ function get_user_list(){
     "token": token
   }
   $.ajax({
-    url: 'https://127.0.0.1/list_of_users',
+    url: 'https://'+IP+'/list_of_users',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -465,7 +474,7 @@ function get_group_list(){
   }
 
   $.ajax({
-    url: 'https://127.0.0.1/list_of_group',
+    url: 'https://'+IP+'/list_of_group',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -505,7 +514,7 @@ $('#contact-list').on('click', 'li', function () {
     "friend": u_login
   }
   $.ajax({
-    url: 'https://127.0.0.1/get_dms',
+    url: 'https://'+IP+'/get_dms',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -553,7 +562,7 @@ $('#channels-list').on('click', 'li', function () {
     "group_id": g_id
   }
   $.ajax({
-    url: 'https://127.0.0.1/get_gms',
+    url: 'https://'+IP+'/get_gms',
     data: JSON.stringify(DataToSend),
     dataType: 'json',
     type: 'POST',
@@ -595,7 +604,7 @@ $("#send_button").click(function(){
       "content": $("#content-to-send").val()
     }
     $.ajax({
-      url: 'https://127.0.0.1/send_dm',
+      url: 'https://'+IP+'/send_dm',
       data: JSON.stringify(DataToSend),
       dataType: 'json',
       type: 'POST',
@@ -609,7 +618,7 @@ $("#send_button").click(function(){
             "friend": friend
           }
           $.ajax({
-            url: 'https://127.0.0.1/get_dms',
+            url: 'https://'+IP+'/get_dms',
             data: JSON.stringify(DataToSend),
             dataType: 'json',
             type: 'POST',
@@ -650,7 +659,7 @@ $("#send_button").click(function(){
       "content": $("#content-to-send").val()
     }
     $.ajax({
-      url: 'https://127.0.0.1/send_gm',
+      url: 'https://'+IP+'/send_gm',
       data: JSON.stringify(DataToSend),
       dataType: 'json',
       type: 'POST',
@@ -664,7 +673,7 @@ $("#send_button").click(function(){
             "group_id": group_id
           }
           $.ajax({
-            url: 'https://127.0.0.1/get_gms',
+            url: 'https://'+IP+'/get_gms',
             data: JSON.stringify(DataToSend),
             dataType: 'json',
             type: 'POST',
@@ -711,7 +720,7 @@ $("#send_button").click(function(){
       "group_name": $("#cgname").val()
     }
     $.ajax({
-      url: 'https://127.0.0.1/create_group',
+      url: 'https://'+IP+'/create_group',
       data: JSON.stringify(DataToSend),
       dataType: 'json',
       type: 'POST',
@@ -739,7 +748,7 @@ $("#send_button").click(function(){
       "group_id": group_id
     }
     $.ajax({
-      url: 'https://127.0.0.1/leave_group',
+      url: 'https://'+IP+'/leave_group',
       data: JSON.stringify(DataToSend),
       dataType: 'json',
       type: 'POST',
