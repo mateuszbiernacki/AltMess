@@ -184,6 +184,7 @@ $("#logout").click(function(){
         $("#channel-title").empty();
         $("#uname").val('');
         $("#upass").val('');
+        $('input').val('');
 
       }
       else {
@@ -239,14 +240,37 @@ $("#invite-button").click(function(){
 $("#invite-members").click(function(){
   $("#main").hide();
   $("#inv-window").show();
-  $.each(users, function(i, obj) {
-    $("#users-to-invite").append('<input type="checkbox" id="toinv_'+obj+'"><label>'+obj+'</label></br>')
+  current_users = [];
+    var DataToSend = {
+    "login": login,
+    "token": token,
+    "group_id": group_id
+  }
+  $.ajax({
+    url: 'https://'+IP+'/list_of_group_members',
+    data: JSON.stringify(DataToSend),
+    dataType: 'json',
+    type: 'POST',
+    contentType: "application/json",
+    traditional: true,
+    success: function(data) {
+        $.each(data, function(i, obj){
+            current_users.push(obj);
+        });
+        console.log(current_users)
+        $.each(users.filter(n => !current_users.includes(n)), function(i, obj) {
+          $("#users-to-invite").append('<input type="checkbox" id="toinv_'+obj+'"><label>'+obj+'</label></br>')
+        });
+      }
   });
+
 })
 
 $("#invite-back").click(function(){
   $("#main").show();
   $("#inv-window").hide();
+  $('input[type=text]').val('');
+  $('input[type=password]').val('');
 })
 
 $("#gm-plus").click(function(){
@@ -257,6 +281,8 @@ $("#gm-plus").click(function(){
 $("#gr-back").click(function(){
   $("#main").show();
   $("#cg-window").hide();
+  $('input[type=text]').val('');
+  $('input[type=password]').val('');
 })
 
 $("#newaccount").click(function(){
@@ -273,6 +299,8 @@ $("#backtologin").click(function(){
   $("#loginwin").show();
   $("#forgotwin").hide();
   $("#codewin").hide();
+  $('input[type=text]').val('');
+  $('input[type=password]').val('');
 })
 
 $("#fbacktologin").click(function(){
@@ -281,6 +309,8 @@ $("#fbacktologin").click(function(){
   $("#loginwin").show();
   $("#forgotwin").hide();
   $("#codewin").hide();
+  $('input[type=text]').val('');
+  $('input[type=password]').val('');
 })
 
 $("#cbacktologin").click(function(){
@@ -289,6 +319,8 @@ $("#cbacktologin").click(function(){
   $("#loginwin").show();
   $("#forgotwin").hide();
   $("#codewin").hide();
+  $('input[type=text]').val('');
+  $('input[type=password]').val('');
 })
 
 $("#fsubmit").click(function(){
@@ -309,6 +341,7 @@ $("#fsubmit").click(function(){
         $("#registerwin").hide();
         $("#loginwin").hide();
         $("#codewin").show();
+        $("#forgotwin").hide();
       }
       else {
         $("#ferror").text(data.r)
@@ -547,8 +580,6 @@ $('#contact-list').on('click', 'li', function () {
 
 });
 
-
-
 $('#channels-list').on('click', 'li', function () {
   var g_id = $(this).attr('id');
   $(this).css("font-weight", "");
@@ -585,6 +616,29 @@ $('#channels-list').on('click', 'li', function () {
           $("#conversation").append('<div title="'+obj[2].slice(0, -10)+'" class="message">'+obj[1]+'</div>');
         });
         $("#conversation").scrollTop($("#conversation")[0].scrollHeight);
+          var DataToSend = {
+                "login": login,
+                "token": token,
+                "group_id": group_id
+              }
+          $.ajax({
+            url: 'https://'+IP+'/list_of_group_members',
+            data: JSON.stringify(DataToSend),
+            dataType: 'json',
+            type: 'POST',
+            contentType: "application/json",
+            traditional: true,
+            success: function(data) {
+              console.log(data);
+              var users_ = "";
+              $.each(data, function(i, obj) {
+                console.log(obj)
+                users_ = users_ + obj + "\n";
+              });
+              console.log(users_);
+              $("#channel-title").attr("title", users_);
+            }
+        });
       }
       else {
         alert(data.r);
@@ -709,7 +763,7 @@ $("#send_button").click(function(){
   }
   })
 
-  $("#cgsubmit").click(function(){
+$("#cgsubmit").click(function(){
     if ($("#cgname").val().length < 2){
       $("#crerror").text("Group name must have almost 3 characters.");
       return;
@@ -740,7 +794,7 @@ $("#send_button").click(function(){
     });
   })
 
-  $("#leave-group").click(function(){
+$("#leave-group").click(function(){
 
     var DataToSend = {
       "login": login,
@@ -757,6 +811,12 @@ $("#send_button").click(function(){
       success: function(data) {
         if (data.r == 'ok') {
           get_group_list();
+          $("#invite-members").hide();
+          $("#leave-group").hide();
+          $("#channel-title").text("");
+          $("#channel-title").attr("title","");
+          $("#conversation").empty();
+
         }
         else {
           alert(data.r);
