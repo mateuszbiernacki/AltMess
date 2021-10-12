@@ -159,7 +159,8 @@ $("#logout").click(function () {
                 $("#channel-title").empty();
                 $("#uname").val('');
                 $("#upass").val('');
-                $('input').val('');
+                $('input[type=text]').val('');
+                $('input[type=password]').val('');
 
             } else {
                 alert(data.r);
@@ -227,6 +228,7 @@ $("#invite-members").click(function () {
         contentType: "application/json",
         traditional: true,
         success: function (data) {
+            $("#users-to-invite").empty()
             $.each(data, function (i, obj) {
                 current_users.push(obj);
             });
@@ -503,6 +505,7 @@ $('li').click(function () {
 });
 
 $('#contact-list').on('click', 'li', function () {
+    $("#channel-title").removeAttr('title');
     const u_login = $(this).attr('id');
     $(this).css("font-weight", "");
     $("#channel-title").text(u_login);

@@ -295,3 +295,7 @@ span#channel-title {
 .error {
   color: red;
 }
+
+.but {
+  cursor: pointer;
+}
